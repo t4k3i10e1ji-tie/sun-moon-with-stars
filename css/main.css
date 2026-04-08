@@ -1,0 +1,179 @@
+
+/* --- 背景固定レイヤー --- */
+.fixed-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    z-index: -1;
+    /* スクロールに連動して空の色を変える */
+    animation: sky-change linear forwards;
+    animation-timeline: scroll(root);
+}
+
+/* --- 太陽のデザインと動き --- */
+.sun-container {
+    position: absolute;
+    width: clamp(80px, 15vw, 150px);
+    aspect-ratio: 1 / 1;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 5;
+    animation: sun-move linear forwards;
+    animation-timeline: scroll(root);
+}
+
+.sun {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    animation: sun-glow-main linear forwards;
+    animation-timeline: scroll(root);
+}
+
+.sun-glow {
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    border-radius: 50%;
+    filter: blur(30px);
+    animation: sun-glow-outer linear forwards;
+    animation-timeline: scroll(root);
+}
+
+/* --- 月のデザインと動き --- */
+.moon-container {
+    position: absolute;
+    width: clamp(60px, 10vw, 100px);
+    aspect-ratio: 1 / 1;
+    left: 70%;
+    z-index: 4;
+    animation: moon-move linear forwards;
+    animation-timeline: scroll(root);
+}
+
+.moon {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: #f1f5f9;
+    border-radius: 50%;
+    box-shadow: 0 0 20px 5px rgba(241, 245, 249, 0.5);
+}
+
+.moon-glow {
+    position: absolute;
+    top: -40%;
+    left: -40%;
+    width: 180%;
+    height: 180%;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255,255,255,0.3) 0%, transparent 70%);
+    filter: blur(15px);
+}
+
+/* --- 星のデザイン --- */
+.stars-container {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+    animation: stars-appear linear forwards;
+    animation-timeline: scroll(root);
+}
+
+.star {
+    position: absolute;
+    background: #fff;
+    border-radius: 50%;
+    box-shadow: 0 0 5px #fff;
+}
+
+/* 星の配置 */
+.s1 { width: 3px; height: 3px; top: 10%; left: 15%; }
+.s2 { width: 2px; height: 2px; top: 25%; left: 80%; }
+.s3 { width: 4px; height: 4px; top: 15%; left: 50%; }
+.s4 { width: 2px; height: 2px; top: 45%; left: 10%; }
+.s5 { width: 3px; height: 3px; top: 35%; left: 90%; }
+.s6 { width: 1px; height: 1px; top: 60%; left: 25%; }
+.s7 { width: 2px; height: 2px; top: 20%; left: 40%; }
+.s8 { width: 3px; height: 3px; top: 55%; left: 70%; }
+
+/* --- 地面 --- */
+.ground {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 20vh;
+    background: #07090d;
+    z-index: 10;
+}
+
+/* --- コンテンツスタイル --- */
+.main-content {
+    position: relative;
+    z-index: 20;
+}
+
+.screen-section {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.glass-card {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    padding: 2rem 4rem;
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: white;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+}
+
+/* --- アニメーション定義 --- */
+
+@keyframes sky-change {
+    0%   { background: #87CEEB; }
+    45%  { background: #fb923c; }
+    65%  { background: #4c1d95; }
+    100% { background: #020617; }
+}
+
+@keyframes sun-move {
+    0%   { top: 15%; opacity: 1; }
+    50%  { top: 65%; opacity: 1; }
+    75%, 100% { top: 110%; opacity: 0; }
+}
+
+@keyframes sun-glow-main {
+    0% { background: #fff; box-shadow: 0 0 40px #fff; }
+    50% { background: #ff4e50; box-shadow: 0 0 80px #ff4e50; }
+}
+
+@keyframes sun-glow-outer {
+    0% { opacity: 0.6; transform: scale(1); }
+    50% { 
+        opacity: 1; 
+        transform: scale(1.4);
+        background: radial-gradient(circle, #ffcc00 0%, #ff6600 50%, transparent 70%);
+    }
+}
+
+@keyframes moon-move {
+    0%, 65% { top: 110%; opacity: 0; }
+    85%, 100% { top: 20%; opacity: 1; }
+}
+
+@keyframes stars-appear {
+    0%, 75% { opacity: 0; }
+    100% { opacity: 1; }
+}
